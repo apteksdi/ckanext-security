@@ -6,7 +6,7 @@ from ckan import authz
 from ckan.common import _
 from ckan.lib.navl.dictization_functions import Missing, Invalid
 
-MIN_PASSWORD_LENGTH = 6
+MIN_PASSWORD_LENGTH = 8
 MIN_LEN_ERROR = (
     'Your password must be {} characters or longer, and consist of at least '
     'three of the following character sets: uppercase characters, lowercase '
@@ -28,7 +28,7 @@ def user_password_validator(key, data, errors, context):
         rules = [
             any(x.isupper() for x in value),
             any(x.islower() for x in value),
-           # any(x.isdigit() for x in value),
+            any(x.isdigit() for x in value),
             any(x in string.punctuation for x in value)
         ]
         if len(value) < MIN_PASSWORD_LENGTH or sum(rules) < 3:
